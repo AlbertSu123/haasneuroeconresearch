@@ -12,37 +12,8 @@ Qualtrics.SurveyEngine.addOnReady(function()
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
 	//this.getChoiceValue gets the displayed text in the textbox.
-	console.log(this.getChoiceValue(1));
-	/*fetch("https://montanaflynn-spellcheck.p.rapidapi.com/check/?text=This%20sentnce%20has%20some%20probblems.", {
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "montanaflynn-spellcheck.p.rapidapi.com",
-			"x-rapidapi-key": "ebcfefc3femsh385fd2284404109p127a38jsnf2165f9199f7"
-		}
-	})
-	.then(response => {
-		console.log(response(this.getChoiceValue(1)));
-		console.log('hello');
-	})
-	.catch(err => {
-		console.log(err);
-	});
-		console.log('hi');*/
-
-
-xhr.send(this.getChoiceValue(1));
-	var data = this.getChoiceValue(1);
-
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
-
-xhr.addEventListener("readystatechange", function () {
-	if (this.readyState === this.DONE) {
-		console.log(this.responseText);
-	}
-});
-	xhr.open("GET", "https://montanaflynn-spellcheck.p.rapidapi.com/check/?text=This%20sentnce%20has%20some%20probblems.");
-xhr.setRequestHeader("x-rapidapi-host", "montanaflynn-spellcheck.p.rapidapi.com");
-xhr.setRequestHeader("x-rapidapi-key", "ebcfefc3femsh385fd2284404109p127a38jsnf2165f9199f7");
-
+	var fs = require('fs');
+	var textByLine = fs.readFileSync('dancers.txt').toString().split("\n");
+	console.log(textByLine);
+	console.log(difflib.getCloseMatches(this.getChoiceValue(1), ['ape', 'apple', 'peach', 'puppy']))
 });

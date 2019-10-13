@@ -1,0 +1,37 @@
+Qualtrics.SurveyEngine.addOnload(function()
+{
+	/*Place your JavaScript here to run when the page loads*/
+
+});
+
+Qualtrics.SurveyEngine.addOnReady(function()
+{
+	/*Place your JavaScript here to run when the page is fully displayed*/
+
+});
+
+Qualtrics.SurveyEngine.addOnUnload(function()
+{
+	/*Place your JavaScript here to run when the page is unloaded*/
+	var untransformedkeyword = '${lm://Field/2}'
+	var keywordlist = []
+	var keyword= ""
+	for (var i = 0; i < untransformedkeyword.length; i ++){
+		var char = untransformedkeyword.charAt(i)
+		if (char == ','){
+			keywordlist.push(keyword)
+			keyword = ""
+		}
+		else {
+			keyword += char
+		}
+	}
+	var correctedChoice = difflib.getCloseMatches(this.getChoiceValue(1), keywordlist, 1, 0.5)
+	//increase the last parameter of correctedChoice to make it have a higher possibility to do change it to a word in the list
+	//decrease to make it more likely for the user's word to remain unchanged
+	if (correctedChoice.length > 0){
+		this.setChoiceAnswerValue(1, 1,correctedChoice)
+	}
+
+
+});

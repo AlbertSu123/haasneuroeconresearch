@@ -25,7 +25,10 @@ Qualtrics.SurveyEngine.addOnload(function()
 	else{
 		option.text = untransformedkeyword;
 	}
-	 jQuery("#"+this.questionId+" select").append(option);
+	if(keywordsstring.includes(option) == False){
+		jQuery("#"+this.questionId+" select").append(option);
+	}
+	 
 
 
 });
